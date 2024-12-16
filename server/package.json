@@ -1,0 +1,28 @@
+{
+  "name": "arnifi-blog-server",
+  "version": "1.0.0",
+  "description": "multi user blogging platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakibultron/arnifi-blog.git"
+  },
+  "keywords": [
+    "node.js",
+    "express.js"
+  ],
+  "author": "https://github.com/rakibultron",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rakibultron/arnifi-blog/issues"
+  },
+  "homepage": "https://github.com/rakibultron/arnifi-blog#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
