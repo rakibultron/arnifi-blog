@@ -1,10 +1,20 @@
+import { Children } from "react";
 import "./App.css";
+import { ThemeProvider } from "./components/theme-provider";
 import { Button } from "./components/ui/button";
+import { ThemeModeToggle } from "./components/ThemeModeToggle";
 
 function App() {
   return (
     <>
-      <Button variant="secondary">Secondary</Button>
+      <ThemeProvider>
+        <div className="app">
+          <header className="app-header">
+            <ThemeModeToggle />
+          </header>
+          {/* Rest of your app */}
+        </div>
+      </ThemeProvider>
     </>
   );
 }
