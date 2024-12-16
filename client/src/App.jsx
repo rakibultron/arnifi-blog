@@ -12,7 +12,6 @@ function App() {
           <header className="app-header">
             <ThemeModeToggle />
           </header>
-          {/* Rest of your app */}
         </div>
       </ThemeProvider>
     </>
