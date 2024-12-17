@@ -22,8 +22,21 @@ const useAuth = () => {
         }
     };
 
+    const userRegister = async (url, body, { headers = {}, params = {}, ...restOptions } = {}) => {
+        try {
+            const res = await axios.post(url, body, { headers, params, ...restOptions });
+            navigate("/auth/login");
+            console.log("User register hook ====>", { res })
+        } catch (error) {
 
-    return { userLogin, loading, error };
+            console.log({ error });
+            setError(error);
+            throw error;
+        }
+    };
+
+
+    return { userLogin, userRegister, loading, error };
 };
 
 export default useAuth;
