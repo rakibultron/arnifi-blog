@@ -1,5 +1,7 @@
 import BlogItem from "./BlogItem";
-
+import { useEffect } from "react";
+import axios from "@/lib/axiosInstance";
+import { useState } from "react";
 const blogPosts = [
   {
     slug: "post-1",
@@ -46,25 +48,43 @@ const blogPosts = [
     tag: "UX",
   },
 ];
+console.log(import.meta.env.VITE_APP_BACKEND_API_BASE);
 
 export default function BlogSection() {
+  const [blogs, setBlogs] = useState(null);
+  useEffect(() => {
+    getBlogs();
+  }, []);
+
+  const getBlogs = async () => {
+    const res = await axios.get("/blogs");
+    console.log({ res });
+
+    if (res.data) {
+      setBlogs(res.data);
+    }
+    return res;
+  };
+
   return (
     <div className="min-h-screen  p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {blogPosts.map((post) => (
-          <BlogItem
-            key={post.slug}
-            slug={post.slug}
-            title={post.title}
-            imageUrl={post.imageUrl}
-            summary={post.summary}
-            tag={post.tag}
-            authorName={post.authorName}
-            authorImg={post.authorImg}
-            authorPosition={post.authorPosition}
-            authorBio={post.authorBio}
-          />
-        ))}
+        {blogs
+          ? blogs.map((post) => (
+              <BlogItem
+                key={post.id}
+                slug={post.id}
+                title={post.title}
+                // imageUrl={post.imageUrl}
+                // summary={post.summary}
+                // tag={post.tag}
+                // authorName={post.authorName}
+                // authorImg={post.authorImg}
+                // authorPosition={post.authorPosition}
+                // authorBio={post.authorBio}
+              />
+            ))
+          : null}
       </div>
     </div>
   );
