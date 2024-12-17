@@ -4,8 +4,8 @@
   "description": "multi user blogging platform",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon --env-file=.env.dev index.js"
+    "start:dev": "nodemon --env-file=.env.dev index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
