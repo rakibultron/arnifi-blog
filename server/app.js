@@ -1,4 +1,5 @@
 const routes = require("./routers/routes");
+const mongoose = require("mongoose");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors")
@@ -24,6 +25,22 @@ app.use(
         credentials: true,
     })
 );
+
+
+
+console.log(process.env.DB_NAME)
+
+// Connect to MongoDB
+mongoose
+    .connect(
+        `mongodb+srv://${process.env.DB_USER_NAME}:${process.env.DB_PASSWORD}@${process.env.UNIQUE_DB_UUID}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+    )
+    .then(() => {
+        console.log(`app connected with ${process.env.DB_NAME} database 🚀`);
+    })
+    .catch((err) => {
+        console.error("MongoDB connection error: ", err);
+    });
 
 
 // API Routes
