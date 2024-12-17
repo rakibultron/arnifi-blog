@@ -18,18 +18,18 @@ const BlogItem = ({
         <div className="absolute top-2 right-2 px-2 py-1  text-white text-xs rounded-tr-lg rounded-bl-lg ">
           {/* Displaying tags */}
           <div className="flex space-x-2">
-            <span className="px-2 py-1 rounded-full text-xs bg-blue-500">
+            {/* <span className="px-2 py-1 rounded-full text-xs bg-blue-500">
               {tag}
-            </span>
+            </span> */}
           </div>
         </div>
-        <Link to={`/blog/post/${slug}`}>
+        {/* <Link to={`/blog/post/${slug}`}>
           <img
             className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
             src={imageUrl}
             alt={title}
           />
-        </Link>
+        </Link> */}
       </div>
 
       {/* Blog Details Section */}
@@ -43,13 +43,13 @@ const BlogItem = ({
               {title}
             </Link>
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          {/* <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
             {summary}
-          </p>
+          </p> */}
         </div>
 
         {/* Author Info Section */}
-        <div className="flex items-center mt-4 space-x-4">
+        {/* <div className="flex items-center mt-4 space-x-4">
           <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-300 dark:border-gray-600">
             <img
               src={authorImg}
@@ -68,7 +68,7 @@ const BlogItem = ({
               {authorBio}
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
