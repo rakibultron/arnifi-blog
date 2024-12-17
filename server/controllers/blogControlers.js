@@ -38,4 +38,27 @@ const createBlog = async (req, res) => {
     }
 };
 
-module.exports = { createBlog };
+// Get blogs
+const getAllBlogs = async (req, res) => {
+    try {
+
+        const blogs = await blogService.getAllBlogs();
+
+
+        res.status(200).json({
+            message: 'Blogs fetched successfully',
+            blogs,
+        });
+    } catch (err) {
+        console.error('Error fetching blogs:', err);
+
+
+        res.status(500).json({
+            error: 'Failed to fetch blogs',
+            details: err.message || 'Unexpected error occurred',
+        });
+    }
+};
+
+
+module.exports = { createBlog, getAllBlogs };
