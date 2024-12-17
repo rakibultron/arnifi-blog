@@ -60,5 +60,26 @@ const getAllBlogs = async (req, res) => {
     }
 };
 
+const deleteBlogHandler = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.user.userId;
 
-module.exports = { createBlog, getAllBlogs };
+
+        const result = await blogService.deleteBlog(id, userId);
+
+
+        res.status(200).json(result);
+    } catch (err) {
+        console.error('Error deleting blog:', err);
+
+
+        res.status(400).json({
+            error: 'Failed to delete blog',
+            details: err.message || 'Unexpected error occurred',
+        });
+    }
+};
+
+
+module.exports = { createBlog, getAllBlogs, deleteBlogHandler };
