@@ -7,14 +7,9 @@ import AppRouter from "./routes/AppRouter";
 function App() {
   return (
     <>
-      {/* <ThemeProvider> */}
-      <AppRouter />
-      {/* <div className="app">
-          <header className="app-header">
-            <ThemeModeToggle />
-          </header>
-        </div> */}
-      {/* </ThemeProvider> */}
+      <ThemeProvider>
+        <AppRouter />
+      </ThemeProvider>
     </>
   );
 }
