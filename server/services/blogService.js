@@ -70,4 +70,36 @@ const deleteBlog = async (blogId, userId) => {
 };
 
 
-module.exports = { createBlog, getAllBlogs, deleteBlog }
+
+const updateBlog = async ({ id, userId, updateData }) => {
+    try {
+        // Find and update the blog
+        const updatedBlog = await Blog.findByIdAndUpdate(
+            id,
+            {
+                $set: updateData,
+            },
+            {
+                new: true,
+                runValidators: true,
+            }
+        );
+
+        if (!updatedBlog) {
+            throw new Error('Blog not found');
+        }
+
+        // Check if the authenticated user is the author
+        if (updatedBlog.author.toString() !== userId.toString()) {
+            throw new Error('Unauthorized: You are not the author of this blog');
+        }
+
+        return updatedBlog;
+    } catch (err) {
+        throw new Error(err.message);
+    }
+};
+
+
+
+module.exports = { createBlog, getAllBlogs, deleteBlog, updateBlog }
