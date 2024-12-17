@@ -9,15 +9,19 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
+import useAuth from "@/hooks/useAuth";
 const LoginForm = () => {
+  const { userLogin } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const { email, password } = data;
+    const loginData = await userLogin("/auth/login", { email, password });
   };
 
   return (

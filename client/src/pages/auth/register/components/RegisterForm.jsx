@@ -9,16 +9,25 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
+import useAuth from "@/hooks/useAuth";
 
 const RegisterForm = () => {
+  const { userRegister } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    console.log(data);
+    const { name, email, password } = data;
+    const registerData = await userRegister("/auth/signup", {
+      name,
+      email,
+      password,
+    });
   };
 
   return (
@@ -38,7 +47,7 @@ const RegisterForm = () => {
                 id="full-name"
                 type="text"
                 placeholder="Your full name"
-                {...register("fullName", { required: "Full Name is required" })}
+                {...register("name", { required: "Full Name is required" })}
               />
               {errors.fullName && (
                 <span className="text-red-500">{errors.fullName.message}</span>
