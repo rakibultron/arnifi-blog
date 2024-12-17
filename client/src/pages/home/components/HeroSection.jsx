@@ -20,7 +20,7 @@ const HeroSection = () => {
           <Button size="lg" className="mt-10">
             Explore All Blogs
           </Button>
-          <div className="mx-auto mt-10 flex w-fit flex-col items-center gap-4 sm:flex-row">
+          {/* <div className="mx-auto mt-10 flex w-fit flex-col items-center gap-4 sm:flex-row">
             <span className="mx-4 inline-flex items-center -space-x-4">
               <Avatar className="size-14 border">
                 <AvatarImage
@@ -53,7 +53,7 @@ const HeroSection = () => {
                 />
               </Avatar>
             </span>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
