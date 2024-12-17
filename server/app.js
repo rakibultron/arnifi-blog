@@ -17,7 +17,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
     cors({
         origin: [
-            "https://arnifi-blog.vercel.app"
+            "https://arnifi-blog.vercel.app",
+            "http://localhost:5173",
         ],
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         preflightContinue: false,
