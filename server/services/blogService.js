@@ -37,4 +37,14 @@ const createBlog = async ({ title, category, author, content, image, userId }) =
 };
 
 
-module.exports = { createBlog }
+const getAllBlogs = async () => {
+    try {
+        const blogs = await Blog.find().sort({ createdAt: -1 });
+        return blogs;
+    } catch (err) {
+        throw new Error(`Error fetching blogs: ${err.message}`);
+    }
+};
+
+
+module.exports = { createBlog, getAllBlogs }
