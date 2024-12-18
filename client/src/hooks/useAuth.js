@@ -7,7 +7,7 @@ import { jwtDecode } from "jwt-decode";
 
 const useAuth = () => {
     const navigate = useNavigate();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    // const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -39,29 +39,13 @@ const useAuth = () => {
         }
     };
 
-
-    // const userValidate = () => {
-    //     const token = Cookies.get('token')
-    //     const decoded = jwtDecode(token);
-
-    //     console.log({ token, decoded })
-    //     // if (cookieValue && isCookieValid(cookieValue)) {
-    //     //     setIsAuthenticated(true);
-    //     //     return true;
-    //     // }
-    //     // setIsAuthenticated(false);
-    //     // return false;
-    // };
-
-
     const userValidate = () => {
-        const token = Cookies.get("token");
-        setLoading(true);
+        const token = localStorage.getItem("token");
 
         if (!token) {
-            console.log("No token found");
-            setIsAuthenticated(false);
-            setLoading(false); // Always set loading to false
+            console.warn("No token found");
+
+            navigate("/auth/login");
             return false;
         }
 
@@ -71,21 +55,23 @@ const useAuth = () => {
 
             if (decoded.exp && decoded.exp > currentTime) {
                 console.log("Token is valid.");
-                setIsAuthenticated(true);
+
+                return true;
             } else {
-                console.log("Token has expired.");
-                setIsAuthenticated(false);
+                console.warn("Token has expired.");
+
+                navigate("/auth/login");
+                return false;
             }
         } catch (error) {
             console.error("Failed to decode token:", error.message);
-            setIsAuthenticated(false);
-        } finally {
-            // Always set loading to false at the end
-            setLoading(false);
+
+            navigate("/auth/login");
+            return false;
         }
     };
 
-    return { userLogin, userRegister, userValidate, isAuthenticated, loading, error };
+    return { userLogin, userRegister, userValidate, loading, error };
 };
 
 export default useAuth;
