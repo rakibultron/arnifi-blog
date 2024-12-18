@@ -102,6 +102,14 @@ const updateBlog = async ({ id, userId, updateData }) => {
     }
 };
 
+const getBlogById = async (id) => {
+    try {
+        const blog = await Blog.findById(id).populate('userId', 'name email'); // Populate userId with name and email fields
+        return blog;
+    } catch (err) {
+        throw new Error(`Error fetching blog by ID: ${err.message}`);
+    }
+};
 
 
-module.exports = { createBlog, getAllBlogs, deleteBlog, updateBlog }
+module.exports = { createBlog, getAllBlogs, deleteBlog, getBlogById, updateBlog }
