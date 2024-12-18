@@ -38,7 +38,7 @@ const BlogDetailsPage = () => {
 
   return (
     <div className="w-[80%] mx-auto p-8">
-      <Card className="shadow-sm rounded-lg overflow-hidden w-full border border-gray-200 dark:border-gray-700">
+      <Card className="rounded-lg overflow-hidden w-full border-0 shadow-none">
         <CardHeader className="h-96 relative overflow-hidden">
           <img
             src={blogImage}

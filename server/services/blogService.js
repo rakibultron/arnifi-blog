@@ -54,8 +54,8 @@ const deleteBlog = async (blogId, userId) => {
             throw new Error('Blog not found');
         }
 
-        // Check if the authenticated user is the author
-        if (blog.author.toString() !== userId.toString()) {
+
+        if (blog.userId.toString() !== userId.toString()) {
             throw new Error('Unauthorized: You are not the author of this blog');
         }
 
@@ -69,26 +69,26 @@ const deleteBlog = async (blogId, userId) => {
 
 const updateBlog = async ({ id, userId, updateData }) => {
     try {
-        // Find and update the blog
+
+        const blog = await Blog.findById(id);
+        if (!blog) {
+            throw new Error("Blog not found");
+        }
+
+
+        if (blog.userId.toString() !== userId.toString()) {
+            throw new Error("Unauthorized: You are not the author of this blog");
+        }
+
+
         const updatedBlog = await Blog.findByIdAndUpdate(
             id,
-            {
-                $set: updateData,
-            },
+            { $set: updateData },
             {
                 new: true,
                 runValidators: true,
             }
         );
-
-        if (!updatedBlog) {
-            throw new Error('Blog not found');
-        }
-
-        // Check if the authenticated user is the author
-        if (updatedBlog.author.toString() !== userId.toString()) {
-            throw new Error('Unauthorized: You are not the author of this blog');
-        }
 
         return updatedBlog;
     } catch (err) {
