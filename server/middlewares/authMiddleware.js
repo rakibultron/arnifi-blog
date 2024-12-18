@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 const authenticate = (req, res, next) => {
-    const token = req.header('authToken')
+
+    const { token } = req.cookies;
+
 
     if (!token) {
         return res.status(401).json({ error: 'Access denied. User is not authenticated.' });

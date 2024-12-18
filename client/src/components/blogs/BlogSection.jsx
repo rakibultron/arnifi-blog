@@ -2,6 +2,7 @@ import BlogItem from "./BlogItem";
 import { useEffect } from "react";
 import axios from "@/lib/axiosInstance";
 import { useState } from "react";
+import useAuth from "@/hooks/useAuth";
 const blogPosts = [
   {
     slug: "post-1",
@@ -51,9 +52,11 @@ const blogPosts = [
 console.log(import.meta.env.VITE_APP_BACKEND_API_BASE);
 
 export default function BlogSection() {
+  // const { userValidate } = useAuth();
   const [blogs, setBlogs] = useState(null);
   useEffect(() => {
     getBlogs();
+    // userValidate();
   }, []);
 
   const getBlogs = async () => {
@@ -61,7 +64,7 @@ export default function BlogSection() {
     console.log({ res });
 
     if (res.data) {
-      setBlogs(res.data);
+      setBlogs(res.data.blogs);
     }
     return res;
   };
@@ -72,8 +75,8 @@ export default function BlogSection() {
         {blogs
           ? blogs.map((post) => (
               <BlogItem
-                key={post.id}
-                slug={post.id}
+                key={post._id}
+                // slug={post.id}
                 title={post.title}
                 // imageUrl={post.imageUrl}
                 // summary={post.summary}

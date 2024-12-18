@@ -6,14 +6,12 @@ import Home from "@/pages/home/Home";
 import MainLayout from "@/layouts/MainLayout";
 import About from "@/pages/about/About";
 import Register from "@/pages/auth/register/Register";
-import BlogsPage from "@/pages/blog/BlogsPage";
-import BlogDetailsPage from "@/pages/blog/BlogDetails";
 
-const AppRouter = () => {
+const AppRouter = ({ loading, isAuthenticated }) => {
   return useRoutes([
     {
       path: "/",
-      element: <MainLayout />,
+      element: <MainLayout isAuthenticated={isAuthenticated} />,
       children: [
         {
           path: "",
@@ -22,14 +20,6 @@ const AppRouter = () => {
         {
           path: "about",
           element: <About />,
-        },
-        {
-          path: "blogs",
-          element: <BlogsPage />,
-        },
-        {
-          path: "blogs/:id",
-          element: <BlogDetailsPage />,
         },
       ],
     },

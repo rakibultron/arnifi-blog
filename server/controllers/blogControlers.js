@@ -40,6 +40,8 @@ const createBlog = async (req, res) => {
 
 // Get blogs
 const getAllBlogs = async (req, res) => {
+
+    console.log("Check cookies ====>", req.cookie)
     try {
 
         const blogs = await blogService.getAllBlogs();

@@ -1,12 +1,15 @@
+const cookieParser = require('cookie-parser')
 const routes = require("./routers/routes");
 const mongoose = require("mongoose");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors")
 require("dotenv").config();
+
 const app = express();
 
 
+app.use(cookieParser())
 // Middleware setup
 app.use(morgan("dev"));
 app.use(express.json());
