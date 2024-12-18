@@ -80,29 +80,19 @@ import {
 // Menu items
 const items = [
   {
-    title: "Home",
+    title: "Dashboard",
     url: "#",
     icon: Home,
   },
   {
-    title: "Inbox",
+    title: "My Blogs",
     url: "#",
     icon: Inbox,
   },
   {
-    title: "Calendar",
+    title: "Profile",
     url: "#",
     icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
   },
 ];
 
