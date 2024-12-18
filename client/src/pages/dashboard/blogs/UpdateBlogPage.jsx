@@ -47,7 +47,6 @@ const UpdateBlogPage = () => {
         const blogData = res.data.blog;
         setBlog(blogData);
         setValue("title", blogData.title);
-        setValue("author", blogData.author);
         setValue("content", blogData.content);
         setSelectedCategory(blogData.category);
       }
@@ -123,19 +122,6 @@ const UpdateBlogPage = () => {
             </Select>
             {errors.category && (
               <p className="text-red-500 text-sm">{errors.category.message}</p>
-            )}
-          </div>
-
-          <div>
-            <Label htmlFor="author">Author</Label>
-            <Input
-              id="author"
-              type="text"
-              placeholder="Author's name"
-              {...register("author", { required: "Author is required" })}
-            />
-            {errors.author && (
-              <p className="text-red-500 text-sm">{errors.author.message}</p>
             )}
           </div>
 

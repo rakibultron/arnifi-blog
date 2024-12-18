@@ -1,19 +1,19 @@
 const Blog = require('../models/blog')
 
 // Create a new blog
-const createBlog = async ({ title, category, author, content, image, userId }) => {
+const createBlog = async ({ title, author, category, content, image, userId }) => {
 
 
     console.log({
+        author,
         title,
         category,
-        author,
         content,
         image,
         userId
     })
 
-    if (!title || !category || !author || !content || !userId) {
+    if (!title || !category || !content || !userId || !author) {
         throw new Error('Missing required fields');
     }
 
