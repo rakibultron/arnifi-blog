@@ -14,8 +14,6 @@ const createBlog = async (req, res) => {
             });
         }
 
-
-
         const blog = await blogService.createBlog({
             title,
             category,
@@ -112,7 +110,6 @@ const updateBlogHandler = async (req, res) => {
     }
 };
 
-
 // Get single blog by ID
 const getBlogById = async (req, res) => {
     const { id } = req.params;
@@ -139,7 +136,6 @@ const getBlogById = async (req, res) => {
         });
     }
 };
-
 
 // Get all blogs for the logged-in user
 const getAllBlogsByUser = async (req, res) => {

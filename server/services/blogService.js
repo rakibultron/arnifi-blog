@@ -115,7 +115,7 @@ const getAllBlogsByUser = async (userId) => {
 
         return blogs;
     } catch (err) {
-        throw new Error(`Error fetching blogs: ${err.message}`); // If an error occurs, throw it
+        throw new Error(`Error fetching blogs: ${err.message}`);
     }
 };
 
