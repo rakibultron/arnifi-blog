@@ -8,6 +8,8 @@ import Login from "./pages/auth/login/Login";
 import Register from "./pages/auth/register/Register";
 import AdminLayout from "./layouts/AdminLayout";
 import ProfilePage from "./pages/dashboard/ProfilePage";
+import BlogsPage from "./pages/blog/BlogsPage";
+import BlogDetailsPage from "./pages/blog/BlogDetails";
 
 const MainComponent = () => {
   // Define routes for authenticated and unauthenticated users
@@ -23,6 +25,14 @@ const MainComponent = () => {
         {
           path: "about",
           element: <About />,
+        },
+        {
+          path: "blogs",
+          element: <BlogsPage />,
+        },
+        {
+          path: "blogs/:id",
+          element: <BlogDetailsPage />,
         },
       ],
     },
@@ -47,10 +57,6 @@ const MainComponent = () => {
         {
           path: "profile",
           element: <ProfilePage />,
-        },
-        {
-          path: "register",
-          element: <Register />,
         },
       ],
     },
