@@ -4,11 +4,16 @@ const blogService = require('../services/blogService');
 // Create a new blog
 const createBlog = async (req, res) => {
     try {
-        const { title, category, author, content, image } = req.body;
+        console.log({ user: req.user })
+        const { name } = req.user
+
+        console.log({ name })
+
+        const { title, category, content, image } = req.body;
 
 
         // Validate required fields
-        if (!title || !category || !author || !content) {
+        if (!title || !category || !content) {
             return res.status(400).json({
                 error: 'All required fields (title, category, author, content) must be filled.',
             });
@@ -17,7 +22,7 @@ const createBlog = async (req, res) => {
         const blog = await blogService.createBlog({
             title,
             category,
-            author,
+            author: name,
             content,
             image,
             userId: req.user.userId
