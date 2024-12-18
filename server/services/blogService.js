@@ -36,13 +36,9 @@ const createBlog = async ({ title, category, author, content, image, userId }) =
     }
 };
 
-const getAllBlogs = async () => {
-    const qry = {
-        category: ""
-    }
-
+const getAllBlogs = async (query = {}) => {
     try {
-        const blogs = await Blog.find().sort({ createdAt: -1 });
+        const blogs = await Blog.find(query).sort({ createdAt: -1 });
         return blogs;
     } catch (err) {
         throw new Error(`Error fetching blogs: ${err.message}`);
