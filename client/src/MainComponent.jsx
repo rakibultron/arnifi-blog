@@ -10,6 +10,8 @@ import AdminLayout from "./layouts/AdminLayout";
 import ProfilePage from "./pages/dashboard/ProfilePage";
 import BlogsPage from "./pages/blog/BlogsPage";
 import BlogDetailsPage from "./pages/blog/BlogDetails";
+import CreateBlogPage from "./pages/dashboard/blogs/CreateBlogPage";
+import EditBlogPage from "./pages/dashboard/blogs/EditBlogPage";
 
 const MainComponent = () => {
   // Define routes for authenticated and unauthenticated users
@@ -57,6 +59,14 @@ const MainComponent = () => {
         {
           path: "profile",
           element: <ProfilePage />,
+        },
+        {
+          path: "blogs/create",
+          element: <CreateBlogPage />,
+        },
+        {
+          path: "blogs/update",
+          element: <EditBlogPage />,
         },
       ],
     },
