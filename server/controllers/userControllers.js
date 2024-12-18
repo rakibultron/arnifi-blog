@@ -26,8 +26,6 @@ const login = async (req, res) => {
 
 
         // Send success response with the JWT token
-
-
         res.cookie('token', token, {
             expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
             httpOnly: true,
