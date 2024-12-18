@@ -28,12 +28,11 @@ const login = async (req, res) => {
         // Send success response with the JWT token
 
 
-
-        res.cookie('token', jwt.token, {
+        res.cookie('token', token, {
             expires: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-            httpOnly: false,
-            secure: false,
-            sameSite: 'None',
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
         });
         res.status(200).send({ message: 'Login successful', user, token });
 
