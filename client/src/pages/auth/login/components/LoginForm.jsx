@@ -22,6 +22,9 @@ const LoginForm = () => {
     console.log(data);
     const { email, password } = data;
     const loginData = await userLogin("/auth/login", { email, password });
+
+    localStorage.setItem("token", loginData.token);
+    console.log({ loginData });
   };
 
   return (

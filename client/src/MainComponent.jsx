@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { Navigate, useRoutes } from "react-router-dom";
-import useAuth from "./hooks/useAuth"; // Custom authentication hook
+import { useRoutes } from "react-router-dom";
+
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/home/Home";
 import About from "./pages/about/About";

@@ -7,11 +7,11 @@ import MainLayout from "@/layouts/MainLayout";
 import About from "@/pages/about/About";
 import Register from "@/pages/auth/register/Register";
 
-const AppRouter = ({ loading, isAuthenticated }) => {
+const AppRouter = () => {
   return useRoutes([
     {
       path: "/",
-      element: <MainLayout isAuthenticated={isAuthenticated} />,
+      element: <MainLayout />,
       children: [
         {
           path: "",
