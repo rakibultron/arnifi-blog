@@ -1,9 +1,10 @@
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardHeader,
+  CardContent,
   CardTitle,
   CardDescription,
-  CardContent,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,9 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "@/lib/axiosInstance";
 
 const UpdateBlogPage = () => {
   const {
@@ -26,31 +29,65 @@ const UpdateBlogPage = () => {
     setValue,
     formState: { errors },
   } = useForm();
-  //   const [image, setImage] = useState(null);
+  const params = useParams();
+  const navigate = useNavigate();
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const onSubmit = async (data) => {
-    console.log({ data });
+  const { id } = params;
+
+  // Fetch blog details and populate the form
+  const getBlogDetails = async () => {
+    try {
+      const res = await axios.get(`/blogs/${id}`);
+      if (res.status === 404) {
+        navigate("/not-found");
+      } else {
+        const blogData = res.data.blog;
+        setBlog(blogData);
+        setValue("title", blogData.title);
+        setValue("author", blogData.author);
+        setValue("content", blogData.content);
+        setSelectedCategory(blogData.category);
+      }
+    } catch (error) {
+      console.error("Error fetching blog details:", error);
+      navigate("/not-found");
+    }
   };
 
-  //   const handleImageUpload = (e) => {
-  //     const file = e.target.files[0];
-  //     if (file) {
-  //       setImage(file);
-  //     }
-  //   };
+  // Handle form submission to update the blog
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      await axios.put(`/blogs/${id}`, data);
+      setLoading(false);
+      alert("Blog updated successfully!");
+      navigate(`/blogs/${id}`);
+    } catch (error) {
+      console.error("Error updating blog:", error);
+      setLoading(false);
+      alert("Failed to update blog.");
+    }
+  };
+
+  useEffect(() => {
+    getBlogDetails();
+  }, []);
+
+  if (!blog) {
+    return <div className="text-center p-8">Loading...</div>;
+  }
 
   return (
     <Card className="mx-auto max-w-2xl w-full">
-      <CardHeader className="space-y-1">
+      <CardHeader>
         <CardTitle className="text-2xl font-bold">Update Blog</CardTitle>
-        <CardDescription>
-          Update the details of your blog post below
-        </CardDescription>
+        <CardDescription>Modify your blog details below</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Title Field */}
           <div>
             <Label htmlFor="title">Title</Label>
             <Input
@@ -64,14 +101,13 @@ const UpdateBlogPage = () => {
             )}
           </div>
 
-          {/* Category Field */}
           <div>
             <Label htmlFor="category">Category</Label>
             <Select
-              value={selectedCategory} // Controlled value
+              value={selectedCategory}
               onValueChange={(value) => {
-                setSelectedCategory(value); // Update local state
-                setValue("category", value); // Update react-hook-form state
+                setSelectedCategory(value);
+                setValue("category", value);
               }}
             >
               <SelectTrigger>
@@ -90,7 +126,6 @@ const UpdateBlogPage = () => {
             )}
           </div>
 
-          {/* Author Field */}
           <div>
             <Label htmlFor="author">Author</Label>
             <Input
@@ -104,7 +139,6 @@ const UpdateBlogPage = () => {
             )}
           </div>
 
-          {/* Content Field */}
           <div>
             <Label htmlFor="content">Content</Label>
             <Textarea
@@ -118,22 +152,8 @@ const UpdateBlogPage = () => {
             )}
           </div>
 
-          {/* Image Upload Field */}
-          {/* <div>
-            <Label htmlFor="image">Upload Image</Label>
-            <input
-              id="image"
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-            />
-            {image && (
-              <p className="text-sm text-gray-500">Image: {image.name}</p>
-            )}
-          </div> */}
-
-          <Button type="submit" className="w-full">
-            Update Blog
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading ? "Updating..." : "Update Blog"}
           </Button>
         </form>
       </CardContent>
