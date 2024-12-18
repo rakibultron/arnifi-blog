@@ -26,6 +26,24 @@ const blogStore = create((set) => ({
             console.log(error);
         }
     },
+    createBlog: async (newBlog, navigate) => {
+        try {
+            const response = await axios.post("/blogs", newBlog);
+            if (response.status === 201) {
+                console.log("Blog created successfully", response.data);
+
+                set((state) => ({
+                    blogs: [...state.blogs, response.data.blog],
+                }));
+
+                const { blogs } = blogStore.getState();
+                navigate('/')
+                console.log({ blogs });
+            }
+        } catch (error) {
+            console.error("Error creating blog", error);
+        }
+    },
 }));
 
 export default blogStore;
