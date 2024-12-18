@@ -36,18 +36,14 @@ const createBlog = async ({ title, category, author, content, image, userId }) =
     }
 };
 
-
-const getAllBlogs = async () => {
-
-
+const getAllBlogs = async (query = {}) => {
     try {
-        const blogs = await Blog.find().sort({ createdAt: -1 });
+        const blogs = await Blog.find(query).sort({ createdAt: -1 });
         return blogs;
     } catch (err) {
         throw new Error(`Error fetching blogs: ${err.message}`);
     }
 };
-
 
 const deleteBlog = async (blogId, userId) => {
     try {
@@ -70,8 +66,6 @@ const deleteBlog = async (blogId, userId) => {
         throw new Error(err.message);
     }
 };
-
-
 
 const updateBlog = async ({ id, userId, updateData }) => {
     try {
@@ -111,5 +105,19 @@ const getBlogById = async (id) => {
     }
 };
 
+// Fetch blogs for the logged-in user
+const getAllBlogsByUser = async (userId) => {
+    try {
 
-module.exports = { createBlog, getAllBlogs, deleteBlog, getBlogById, updateBlog }
+        console.log({ userId })
+
+        const blogs = await Blog.find({ userId }).sort({ createdAt: -1 });
+
+        return blogs;
+    } catch (err) {
+        throw new Error(`Error fetching blogs: ${err.message}`);
+    }
+};
+
+
+module.exports = { createBlog, getAllBlogs, deleteBlog, getBlogById, updateBlog, getAllBlogsByUser }

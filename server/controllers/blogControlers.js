@@ -14,8 +14,6 @@ const createBlog = async (req, res) => {
             });
         }
 
-
-        // Create the blog using the service layer
         const blog = await blogService.createBlog({
             title,
             category,
@@ -41,11 +39,15 @@ const createBlog = async (req, res) => {
 // Get blogs
 const getAllBlogs = async (req, res) => {
 
-    console.log("Check cookies ====>", req.cookie)
+    const { category, author } = req.query;
+
+    let query = {};
+    if (category) query.category = category;
+    if (author) query.author = { $regex: author, $options: "i" };
+
     try {
 
-        const blogs = await blogService.getAllBlogs();
-
+        const blogs = await blogService.getAllBlogs(query);
 
         res.status(200).json({
             message: 'Blogs fetched successfully',
@@ -91,10 +93,8 @@ const updateBlogHandler = async (req, res) => {
         const userId = req.user.userId;
         const updateData = req.body;
 
-        // Call the service function
         const updatedBlog = await blogService.updateBlog({ id, userId, updateData });
 
-        // Return success response
         res.status(200).json({
             message: 'Blog updated successfully',
             blog: updatedBlog,
@@ -102,14 +102,13 @@ const updateBlogHandler = async (req, res) => {
     } catch (err) {
         console.error('Error updating blog:', err);
 
-        // Return error response
+
         res.status(400).json({
             error: 'Failed to update blog',
             details: err.message || 'Unexpected error occurred',
         });
     }
 };
-
 
 // Get single blog by ID
 const getBlogById = async (req, res) => {
@@ -138,5 +137,32 @@ const getBlogById = async (req, res) => {
     }
 };
 
+// Get all blogs for the logged-in user
+const getAllBlogsByUser = async (req, res) => {
+    try {
+        const userId = req.user.userId;
 
-module.exports = { createBlog, getAllBlogs, deleteBlogHandler, updateBlogHandler, getBlogById };
+        const blogs = await blogService.getAllBlogsByUser(userId);
+
+        if (!blogs.length) {
+            return res.status(404).json({
+                message: 'No blogs found for the logged-in user',
+            });
+        }
+
+        res.status(200).json({
+            message: 'Blogs fetched successfully',
+            blogs,
+        });
+    } catch (err) {
+        console.error('Error fetching blogs:', err);
+        res.status(500).json({
+            error: 'Failed to fetch blogs',
+            details: err.message || 'Unexpected error occurred',
+        });
+    }
+};
+
+
+
+module.exports = { createBlog, getAllBlogs, deleteBlogHandler, updateBlogHandler, getBlogById, getAllBlogsByUser };
