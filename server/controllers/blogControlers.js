@@ -110,4 +110,33 @@ const updateBlogHandler = async (req, res) => {
     }
 };
 
-module.exports = { createBlog, getAllBlogs, deleteBlogHandler, updateBlogHandler };
+
+// Get single blog by ID
+const getBlogById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const blog = await blogService.getBlogById(id);
+
+        if (!blog) {
+            return res.status(404).json({
+                message: 'Blog not found',
+            });
+        }
+
+        res.status(200).json({
+            message: 'Blog fetched successfully',
+            blog,
+        });
+    } catch (err) {
+        console.error('Error fetching blog:', err);
+
+        res.status(500).json({
+            error: 'Failed to fetch blog',
+            details: err.message || 'Unexpected error occurred',
+        });
+    }
+};
+
+
+module.exports = { createBlog, getAllBlogs, deleteBlogHandler, updateBlogHandler, getBlogById };
