@@ -62,7 +62,7 @@ export default function BlogSection() {
     <div className="min-h-screen  p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {blogs
-          ? blogs.map((post) => (
+          ? blogs?.slice(0, 8)?.map((post) => (
               <BlogItem
                 key={post._id}
                 id={post._id}
