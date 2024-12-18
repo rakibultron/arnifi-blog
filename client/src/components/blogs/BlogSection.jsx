@@ -50,24 +50,13 @@ const blogPosts = [
   },
 ];
 console.log(import.meta.env.VITE_APP_BACKEND_API_BASE);
-
+import blogStore from "@/store/blogStore";
 export default function BlogSection() {
-  // const { userValidate } = useAuth();
-  const [blogs, setBlogs] = useState(null);
+  const { getBlogs, blogs } = blogStore();
+
   useEffect(() => {
     getBlogs();
-    // userValidate();
   }, []);
-
-  const getBlogs = async () => {
-    const res = await axios.get("/blogs");
-    console.log({ res });
-
-    if (res.data) {
-      setBlogs(res.data.blogs);
-    }
-    return res;
-  };
 
   return (
     <div className="min-h-screen  p-8">
