@@ -1,5 +1,7 @@
 import "./App.css";
-import { ThemeProvider } from "./components/theme-provider";
+// import { ThemeProvider } from "./components/theme-provider";
+
+import { ThemeProvider } from "next-themes";
 
 import MainComponent from "./MainComponent";
 
