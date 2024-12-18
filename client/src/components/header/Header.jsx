@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, User } from "lucide-react";
+import { ThemeModeToggle } from "../ThemeModeToggle";
 
 const Header = () => {
   return (
-    <header className="w-full border-b shadow-sm bg-white px-6">
+    <header className="w-full border-b shadow-sm  px-6">
       <div className="container flex items-center justify-between py-4 mx-auto">
         <Button variant="outline" size="icon" className="md:hidden">
           <Menu className="h-5 w-5" />
@@ -53,6 +54,7 @@ const Header = () => {
           <Button variant="ghost" size="icon">
             <User className="h-5 w-5" />
           </Button>
+          <ThemeModeToggle />
         </div>
       </div>
     </header>
