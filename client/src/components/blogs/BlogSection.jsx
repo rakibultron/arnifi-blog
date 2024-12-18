@@ -65,12 +65,12 @@ export default function BlogSection() {
           ? blogs.map((post) => (
               <BlogItem
                 key={post._id}
-                // slug={post.id}
+                id={post._id}
                 title={post.title}
-                // imageUrl={post.imageUrl}
-                // summary={post.summary}
-                // tag={post.tag}
-                // authorName={post.authorName}
+                imageUrl={post.imageUrl}
+                content={post.content}
+                category={post.category}
+                authorName={post.author}
                 // authorImg={post.authorImg}
                 // authorPosition={post.authorPosition}
                 // authorBio={post.authorBio}
