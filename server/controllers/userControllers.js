@@ -23,8 +23,13 @@ const login = async (req, res) => {
 
         const { user, token } = await userService.authenticateUser(email, password);
 
+
+
         // Send success response with the JWT token
-        res.status(200).json({ message: 'Login successful', user, token });
+
+        res.cookie('token', token);
+        res.status(200).send({ message: 'Login successful', user, token });
+
     } catch (error) {
 
         console.log({ error })
