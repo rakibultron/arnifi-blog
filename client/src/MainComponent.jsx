@@ -11,7 +11,7 @@ import ProfilePage from "./pages/dashboard/ProfilePage";
 import BlogsPage from "./pages/blog/BlogsPage";
 import BlogDetailsPage from "./pages/blog/BlogDetails";
 import CreateBlogPage from "./pages/dashboard/blogs/CreateBlogPage";
-import EditBlogPage from "./pages/dashboard/blogs/EditBlogPage";
+import UpdateBlogPage from "./pages/dashboard/blogs/UpdateBlogPage";
 
 const MainComponent = () => {
   // Define routes for authenticated and unauthenticated users
@@ -65,8 +65,8 @@ const MainComponent = () => {
           element: <CreateBlogPage />,
         },
         {
-          path: "blogs/update",
-          element: <EditBlogPage />,
+          path: "blogs/update/:id",
+          element: <UpdateBlogPage />,
         },
       ],
     },

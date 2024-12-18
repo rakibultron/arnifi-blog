@@ -38,6 +38,8 @@ const createBlog = async ({ title, category, author, content, image, userId }) =
 
 
 const getAllBlogs = async () => {
+
+
     try {
         const blogs = await Blog.find().sort({ createdAt: -1 });
         return blogs;
