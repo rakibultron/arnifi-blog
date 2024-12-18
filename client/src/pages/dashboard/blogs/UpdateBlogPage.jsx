@@ -37,7 +37,7 @@ const UpdateBlogPage = () => {
 
   const { id } = params;
 
-  // Fetch blog details
+  // Fetch blog details and populate the form
   const getBlogDetails = async () => {
     try {
       const res = await axios.get(`/blogs/${id}`);
@@ -57,7 +57,7 @@ const UpdateBlogPage = () => {
     }
   };
 
-  // Update blog details
+  // Handle form submission to update the blog
   const onSubmit = async (data) => {
     setLoading(true);
     try {
@@ -88,7 +88,6 @@ const UpdateBlogPage = () => {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Title Field */}
           <div>
             <Label htmlFor="title">Title</Label>
             <Input
@@ -102,7 +101,6 @@ const UpdateBlogPage = () => {
             )}
           </div>
 
-          {/* Category Field */}
           <div>
             <Label htmlFor="category">Category</Label>
             <Select
@@ -128,7 +126,6 @@ const UpdateBlogPage = () => {
             )}
           </div>
 
-          {/* Author Field */}
           <div>
             <Label htmlFor="author">Author</Label>
             <Input
@@ -142,7 +139,6 @@ const UpdateBlogPage = () => {
             )}
           </div>
 
-          {/* Content Field */}
           <div>
             <Label htmlFor="content">Content</Label>
             <Textarea
