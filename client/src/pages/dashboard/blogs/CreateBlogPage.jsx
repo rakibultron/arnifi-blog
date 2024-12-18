@@ -157,8 +157,11 @@ import {
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-
+import blogStore from "@/store/blogStore";
+import { useNavigate } from "react-router-dom";
 const CreateBlogPage = () => {
+  const { createBlog } = blogStore();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -169,7 +172,7 @@ const CreateBlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(""); // Controlled state for category
 
   const onSubmit = async (data) => {
-    console.log({ data });
+    createBlog(data, navigate);
   };
 
   // const handleImageUpload = (e) => {
