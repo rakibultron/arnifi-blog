@@ -11,8 +11,24 @@ import {
 import { User, Sliders, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ThemeModeToggle } from "../ThemeModeToggle";
+import axios from "@/lib/axiosInstance";
 
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      const res = await axios.post("/auth/logout");
+
+      if (res.status == 200) {
+        console.log({ res });
+        localStorage.removeItem("token");
+        navigate("/auth/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <header className="w-full border-b shadow-sm px-6">
       <div className="container flex items-center justify-between py-4 mx-auto">
@@ -82,14 +98,16 @@ const Header = () => {
                 </Link>
               </DropdownMenuItem>
 
-              <DropdownMenuItem asChild>
-                <Link
-                  to="/logout"
-                  className="flex items-center gap-2 p-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                >
+              <DropdownMenuItem
+                asChild
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                <div className="flex items-center gap-2 p-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                   <LogOut className="h-4 w-4" />
                   Logout
-                </Link>
+                </div>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
