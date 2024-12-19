@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "@/lib/axiosInstance";
+import { toast } from "react-toastify";
 
 const UpdateBlogPage = () => {
   const {
@@ -60,10 +61,10 @@ const UpdateBlogPage = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      await axios.put(`/blogs/${id}`, data);
+      const res = await axios.put(`/blogs/${id}`, data);
       setLoading(false);
-      alert("Blog updated successfully!");
-      navigate(`/blogs/${id}`);
+      toast.success(res.data.message);
+      navigate(`/dashboard`);
     } catch (error) {
       console.error("Error updating blog:", error);
       setLoading(false);

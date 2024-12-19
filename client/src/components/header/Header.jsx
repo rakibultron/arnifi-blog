@@ -12,6 +12,7 @@ import { User, Sliders, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ThemeModeToggle } from "../ThemeModeToggle";
 import axios from "@/lib/axiosInstance";
+import { toast } from "react-toastify";
 
 import { useNavigate } from "react-router-dom";
 const Header = () => {
@@ -22,6 +23,7 @@ const Header = () => {
 
       if (res.status == 200) {
         console.log({ res });
+        toast.success(res.data.message);
         localStorage.removeItem("token");
         navigate("/auth/login");
       }

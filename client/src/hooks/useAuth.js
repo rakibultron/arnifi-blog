@@ -4,6 +4,7 @@ import axios from '@/lib/axiosInstance'
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify"
 
 const useAuth = () => {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ const useAuth = () => {
             const res = await axios.post(url, body, { headers, params, ...restOptions });
             navigate("/");
             console.log("User login hook ====>", { res });
+            toast.success(res.data.message)
             return res.data;
         } catch (error) {
             setError(error);
@@ -30,11 +32,19 @@ const useAuth = () => {
         try {
             const res = await axios.post(url, body, { headers, params, ...restOptions });
             navigate("/auth/login");
-            console.log("User register hook ====>", { res })
+            toast.success(res.data.message);
+            console.log("User register hook ====>", { res });
         } catch (error) {
+            console.log("Error occurred during user registration:", error);
 
-            console.log({ error });
+            let errorMessage = "Something went wrong!";
+            if (error.response && error.response.data.error) {
+                errorMessage = error.response.data.error;
+            }
+            toast.error(errorMessage);
+
             setError(error);
+
             throw error;
         }
     };
