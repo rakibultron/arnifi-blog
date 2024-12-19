@@ -57,6 +57,9 @@ const blogStore = create((set) => ({
             console.error("Error deleting blog", error);
         }
     },
+    clearBlogsStore: () => {
+        set({ blogs: [] });
+    },
 
 }));
 

@@ -61,6 +61,7 @@ const LoginForm = () => {
             <Input
               id="password"
               type="password"
+              placeholder="Please enter valid password"
               {...register("password", { required: "Password is required" })}
             />
             {errors.password && (
