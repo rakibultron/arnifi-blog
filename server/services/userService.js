@@ -49,4 +49,22 @@ const authenticateUser = async (email, password) => {
     return { user, token };
 };
 
-module.exports = { createUser, authenticateUser };
+
+
+
+const logoutUser = (res) => {
+    try {
+
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+        });
+    } catch (error) {
+
+        throw new Error('Failed to clear cookie');
+    }
+};
+
+
+module.exports = { createUser, authenticateUser, logoutUser };
