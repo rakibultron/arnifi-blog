@@ -30,7 +30,8 @@ const CreateBlogPage = () => {
     formState: { errors },
   } = useForm();
   const [image, setImage] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [author, setAuthor] = useState();
 
   const onSubmit = async (data) => {
     createBlog(data, navigate);
@@ -99,7 +100,10 @@ const CreateBlogPage = () => {
               id="content"
               placeholder="Write your blog content here"
               rows={5}
-              {...register("content", { required: "Content is required" })}
+              {...register("content", {
+                required: "Content is required",
+                onChange: (e) => {},
+              })}
             />
             {errors.content && (
               <p className="text-red-500 text-sm">{errors.content.message}</p>
