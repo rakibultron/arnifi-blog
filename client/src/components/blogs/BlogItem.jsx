@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+import imgPlaceHolder from "../../assets/placeholder.jpg";
 const BlogItem = ({
   id,
   title,
@@ -23,7 +24,7 @@ const BlogItem = ({
         <Link to={`/blogs/${id}`}>
           <img
             className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
-            src={imageUrl || "/images/placeholder.jpg"}
+            src={imageUrl || imgPlaceHolder}
             alt={title}
           />
         </Link>
@@ -42,7 +43,7 @@ const BlogItem = ({
         <div className="flex items-center mt-4 space-x-4">
           <div className="w-10 h-10 rounded-full overflow-hidden border border-border">
             <img
-              src={authorImg || "/images/placeholder.jpg"}
+              src={authorImg || imgPlaceHolder}
               alt={authorName}
               className="w-full h-full object-cover"
             />
