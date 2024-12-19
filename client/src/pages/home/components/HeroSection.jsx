@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-
+import { Link } from "react-router-dom";
 const HeroSection = () => {
   return (
     <div>
@@ -17,9 +17,12 @@ const HeroSection = () => {
               thoughts with the community.
             </p>
           </div>
-          <Button size="lg" className="mt-10">
-            Explore All Blogs
-          </Button>
+          <Link to="/blogs">
+            <Button size="lg" className="mt-10">
+              Explore All Blogs
+            </Button>
+          </Link>
+
           {/* <div className="mx-auto mt-10 flex w-fit flex-col items-center gap-4 sm:flex-row">
             <span className="mx-4 inline-flex items-center -space-x-4">
               <Avatar className="size-14 border">

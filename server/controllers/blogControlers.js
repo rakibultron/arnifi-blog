@@ -4,22 +4,25 @@ const blogService = require('../services/blogService');
 // Create a new blog
 const createBlog = async (req, res) => {
     try {
-        const { title, category, author, content, image } = req.body;
+        console.log({ user: req.user })
+        const { name } = req.user
+
+        console.log({ name })
+
+        const { title, category, content, image } = req.body;
 
 
         // Validate required fields
-        if (!title || !category || !author || !content) {
+        if (!title || !category || !content) {
             return res.status(400).json({
                 error: 'All required fields (title, category, author, content) must be filled.',
             });
         }
 
-
-        // Create the blog using the service layer
         const blog = await blogService.createBlog({
             title,
             category,
-            author,
+            author: name,
             content,
             image,
             userId: req.user.userId
@@ -41,11 +44,15 @@ const createBlog = async (req, res) => {
 // Get blogs
 const getAllBlogs = async (req, res) => {
 
-    console.log("Check cookies ====>", req.cookie)
+    const { category, author } = req.query;
+
+    let query = {};
+    if (category) query.category = category;
+    if (author) query.author = { $regex: author, $options: "i" };
+
     try {
 
-        const blogs = await blogService.getAllBlogs();
-
+        const blogs = await blogService.getAllBlogs(query);
 
         res.status(200).json({
             message: 'Blogs fetched successfully',
@@ -91,10 +98,8 @@ const updateBlogHandler = async (req, res) => {
         const userId = req.user.userId;
         const updateData = req.body;
 
-        // Call the service function
         const updatedBlog = await blogService.updateBlog({ id, userId, updateData });
 
-        // Return success response
         res.status(200).json({
             message: 'Blog updated successfully',
             blog: updatedBlog,
@@ -102,7 +107,7 @@ const updateBlogHandler = async (req, res) => {
     } catch (err) {
         console.error('Error updating blog:', err);
 
-        // Return error response
+
         res.status(400).json({
             error: 'Failed to update blog',
             details: err.message || 'Unexpected error occurred',
@@ -110,4 +115,59 @@ const updateBlogHandler = async (req, res) => {
     }
 };
 
-module.exports = { createBlog, getAllBlogs, deleteBlogHandler, updateBlogHandler };
+// Get single blog by ID
+const getBlogById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const blog = await blogService.getBlogById(id);
+
+        if (!blog) {
+            return res.status(404).json({
+                message: 'Blog not found',
+            });
+        }
+
+        res.status(200).json({
+            message: 'Blog fetched successfully',
+            blog,
+        });
+    } catch (err) {
+        console.error('Error fetching blog:', err);
+
+        res.status(500).json({
+            error: 'Failed to fetch blog',
+            details: err.message || 'Unexpected error occurred',
+        });
+    }
+};
+
+// Get all blogs for the logged-in user
+const getAllBlogsByUser = async (req, res) => {
+    try {
+        const userId = req.user.userId;
+
+        const blogs = await blogService.getAllBlogsByUser(userId);
+
+        if (!blogs.length) {
+            return res.status(404).json({
+                message: 'No blogs found for the logged-in user',
+            });
+        }
+
+        res.status(200).json({
+            message: 'Blogs fetched successfully',
+            blogs,
+        });
+    } catch (err) {
+        console.error('Error fetching blogs:', err);
+        res.status(500).json({
+            error: 'Failed to fetch blogs',
+            details: err.message || 'Unexpected error occurred',
+        });
+    }
+};
+
+
+
+module.exports = { createBlog, getAllBlogs, deleteBlogHandler, updateBlogHandler, getBlogById, getAllBlogsByUser };

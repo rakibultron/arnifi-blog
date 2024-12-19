@@ -1,14 +1,14 @@
 import "./App.css";
-// import { ThemeProvider } from "./components/theme-provider";
+import { ThemeProvider } from "./components/theme-provider";
 
-import { ThemeProvider } from "next-themes";
+// import { ThemeProvider } from "next-themes";
 
 import MainComponent from "./MainComponent";
 
 function App() {
   return (
     <>
-      <ThemeProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <MainComponent />
       </ThemeProvider>
     </>

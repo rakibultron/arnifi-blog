@@ -1,23 +1,12 @@
 const Blog = require('../models/blog')
 
 // Create a new blog
-const createBlog = async ({ title, category, author, content, image, userId }) => {
+const createBlog = async ({ title, author, category, content, image, userId }) => {
 
 
-    console.log({
-        title,
-        category,
-        author,
-        content,
-        image,
-        userId
-    })
-
-    if (!title || !category || !author || !content || !userId) {
+    if (!title || !category || !content || !userId || !author) {
         throw new Error('Missing required fields');
     }
-
-
 
     try {
 
@@ -36,18 +25,14 @@ const createBlog = async ({ title, category, author, content, image, userId }) =
     }
 };
 
-
-const getAllBlogs = async () => {
-
-
+const getAllBlogs = async (query = {}) => {
     try {
-        const blogs = await Blog.find().sort({ createdAt: -1 });
+        const blogs = await Blog.find(query).sort({ createdAt: -1 });
         return blogs;
     } catch (err) {
         throw new Error(`Error fetching blogs: ${err.message}`);
     }
 };
-
 
 const deleteBlog = async (blogId, userId) => {
     try {
@@ -58,8 +43,8 @@ const deleteBlog = async (blogId, userId) => {
             throw new Error('Blog not found');
         }
 
-        // Check if the authenticated user is the author
-        if (blog.author.toString() !== userId.toString()) {
+
+        if (blog.userId.toString() !== userId.toString()) {
             throw new Error('Unauthorized: You are not the author of this blog');
         }
 
@@ -71,30 +56,28 @@ const deleteBlog = async (blogId, userId) => {
     }
 };
 
-
-
 const updateBlog = async ({ id, userId, updateData }) => {
     try {
-        // Find and update the blog
+
+        const blog = await Blog.findById(id);
+        if (!blog) {
+            throw new Error("Blog not found");
+        }
+
+
+        if (blog.userId.toString() !== userId.toString()) {
+            throw new Error("Unauthorized: You are not the author of this blog");
+        }
+
+
         const updatedBlog = await Blog.findByIdAndUpdate(
             id,
-            {
-                $set: updateData,
-            },
+            { $set: updateData },
             {
                 new: true,
                 runValidators: true,
             }
         );
-
-        if (!updatedBlog) {
-            throw new Error('Blog not found');
-        }
-
-        // Check if the authenticated user is the author
-        if (updatedBlog.author.toString() !== userId.toString()) {
-            throw new Error('Unauthorized: You are not the author of this blog');
-        }
 
         return updatedBlog;
     } catch (err) {
@@ -102,6 +85,28 @@ const updateBlog = async ({ id, userId, updateData }) => {
     }
 };
 
+const getBlogById = async (id) => {
+    try {
+        const blog = await Blog.findById(id).populate('userId', 'name email'); // Populate userId with name and email fields
+        return blog;
+    } catch (err) {
+        throw new Error(`Error fetching blog by ID: ${err.message}`);
+    }
+};
+
+// Fetch blogs for the logged-in user
+const getAllBlogsByUser = async (userId) => {
+    try {
+
+        console.log({ userId })
+
+        const blogs = await Blog.find({ userId }).sort({ createdAt: -1 });
+
+        return blogs;
+    } catch (err) {
+        throw new Error(`Error fetching blogs: ${err.message}`);
+    }
+};
 
 
-module.exports = { createBlog, getAllBlogs, deleteBlog, updateBlog }
+module.exports = { createBlog, getAllBlogs, deleteBlog, getBlogById, updateBlog, getAllBlogsByUser }

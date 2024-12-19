@@ -1,59 +1,99 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Menu, User } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { User, Sliders, LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
 import { ThemeModeToggle } from "../ThemeModeToggle";
 
 const Header = () => {
   return (
-    <header className="w-full border-b shadow-sm  px-6">
+    <header className="w-full border-b shadow-sm px-6">
       <div className="container flex items-center justify-between py-4 mx-auto">
         <Button variant="outline" size="icon" className="md:hidden">
-          <Menu className="h-5 w-5" />
+          <Sliders className="h-5 w-5" />
         </Button>
 
         <div className="flex items-center gap-4">
-          <span className="text-lg font-bold">Arnifi Blog</span>
+          <Link
+            to="/"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            <span className="text-lg font-bold">Arnifi Blog</span>
+          </Link>
         </div>
 
         <nav className="hidden md:flex items-center gap-8 mx-auto">
-          <a
-            href="#"
-            className={cn(
-              "text-sm font-medium hover:text-primary transition-colors"
-            )}
+          <Link
+            to="/"
+            className="text-sm font-medium hover:text-primary transition-colors"
           >
             Home
-          </a>
-          <a
-            href="#"
-            className={cn(
-              "text-sm font-medium hover:text-primary transition-colors"
-            )}
+          </Link>
+          <Link
+            to="/about"
+            className="text-sm font-medium hover:text-primary transition-colors"
           >
             About
-          </a>
-          <a
-            href="#"
-            className={cn(
-              "text-sm font-medium hover:text-primary transition-colors"
-            )}
+          </Link>
+          <Link
+            to="/blogs"
+            className="text-sm font-medium hover:text-primary transition-colors"
           >
             Blogs
-          </a>
-          <a
-            href="#"
-            className={cn(
-              "text-sm font-medium hover:text-primary transition-colors"
-            )}
+          </Link>
+          <Link
+            to="/contact"
+            className="text-sm font-medium hover:text-primary transition-colors"
           >
             Contact
-          </a>
+          </Link>
         </nav>
 
         <div className="flex items-center gap-6">
-          <Button variant="ghost" size="icon">
-            <User className="h-5 w-5" />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="focus:ring-0 dark:hover:bg-gray-700 hover:bg-gray-100"
+              >
+                <User className="h-5 w-5 text-gray-700 dark:text-white" />
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>Settings</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem asChild>
+                <Link
+                  to="/dashboard"
+                  className="flex items-center gap-2 p-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                >
+                  <Sliders className="h-4 w-4" />
+                  Dashboard
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem asChild>
+                <Link
+                  to="/logout"
+                  className="flex items-center gap-2 p-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <ThemeModeToggle />
         </div>
       </div>
