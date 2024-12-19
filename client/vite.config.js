@@ -2,17 +2,18 @@
 import { defineConfig } from "vite";
 import path from "path";
 import react from "@vitejs/plugin-react";
+import removeConsole from "vite-plugin-remove-console";
 
-// https://vitejs.dev/config/
+
 export default defineConfig({
   publicDir: 'public',
   build: {
     outDir: 'dist',
   },
-  plugins: [react()],
+  plugins: [react(), removeConsole()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"), // Ensure this points to the 'src' folder
+      "@": path.resolve(__dirname, "src"),
     },
   },
 });
