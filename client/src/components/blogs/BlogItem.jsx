@@ -23,7 +23,7 @@ const BlogItem = ({
         <Link to={`/blogs/${id}`}>
           <img
             className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
-            src={imageUrl || "/placeholder.jpg"}
+            src={imageUrl || "/images/placeholder.jpg"}
             alt={title}
           />
         </Link>
@@ -42,7 +42,7 @@ const BlogItem = ({
         <div className="flex items-center mt-4 space-x-4">
           <div className="w-10 h-10 rounded-full overflow-hidden border border-border">
             <img
-              src={authorImg || "/placeholder.jpg"}
+              src={authorImg || "/images/placeholder.jpg"}
               alt={authorName}
               className="w-full h-full object-cover"
             />

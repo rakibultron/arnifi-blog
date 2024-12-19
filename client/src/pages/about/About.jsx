@@ -46,7 +46,7 @@ const About = () => {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <div className="p-4 text-center">
               <img
-                src="/placeholder.jpg"
+                src="/images/placeholder.jpg"
                 alt="Team Member 1"
                 className="w-24 h-24 mx-auto rounded-full mb-3"
               />
@@ -55,7 +55,7 @@ const About = () => {
             </div>
             <div className="p-4 text-center">
               <img
-                src="/placeholder.jpg"
+                src="/images/placeholder.jpg"
                 alt="Team Member 2"
                 className="w-24 h-24 mx-auto rounded-full mb-3"
               />
@@ -64,7 +64,7 @@ const About = () => {
             </div>
             <div className="p-4 text-center">
               <img
-                src="/placeholder.jpg"
+                src="/images/placeholder.jpg"
                 alt="Team Member 3"
                 className="w-24 h-24 mx-auto rounded-full mb-3"
               />
@@ -73,7 +73,7 @@ const About = () => {
             </div>
             <div className="p-4 text-center">
               <img
-                src="/placeholder.jpg"
+                src="/images/placeholder.jpg"
                 alt="Team Member 4"
                 className="w-24 h-24 mx-auto rounded-full mb-3"
               />

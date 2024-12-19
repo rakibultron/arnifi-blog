@@ -34,7 +34,7 @@ const BlogDetailsPage = () => {
   }
 
   const formattedDate = new Date(blog.createdAt).toLocaleDateString();
-  const blogImage = blog.image ? blog.image : "/placeholder.jpg";
+  const blogImage = blog.image ? blog.image : "/images/placeholder.jpg";
 
   return (
     <div className="w-[80%] mx-auto p-8">
@@ -54,7 +54,7 @@ const BlogDetailsPage = () => {
             <div className="flex items-center mb-4">
               <div className="w-10 h-10 rounded-full overflow-hidden border border-border mr-4">
                 <img
-                  src={"/placeholder.jpg"}
+                  src="/images/placeholder.jpg"
                   alt={blog.userId.name}
                   className="w-full h-full object-cover rounded-full"
                 />
