@@ -48,12 +48,16 @@ import blogStore from "@/store/blogStore";
 import BlogsUnavailable from "./BlogsUnavailable";
 
 export default function BlogSection() {
-  const { getBlogs, blogs } = blogStore();
+  const { getBlogs, clearBlogsStore, blogs } = blogStore();
 
   // Fetch blogs on mount
   useEffect(() => {
     getBlogs();
-  }, [getBlogs]);
+
+    return () => {
+      clearBlogsStore();
+    };
+  }, [getBlogs, clearBlogsStore]);
 
   return (
     <div className="min-h-screen p-8">
