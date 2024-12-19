@@ -72,6 +72,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -81,12 +82,12 @@ import {
 const items = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/dashboard",
     icon: Home,
   },
   {
-    title: "My Blogs",
-    url: "#",
+    title: "Add Blogs",
+    url: "/dashboard/blogs/create",
     icon: Inbox,
   },
   {
@@ -101,7 +102,8 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          {/* <SidebarGroupLabel>Dashboard</SidebarGroupLabel> */}
+          <SidebarHeader>Menus</SidebarHeader>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

@@ -1,116 +1,3 @@
-// // export default Header;
-// import React, { useState } from "react";
-// import { Button } from "@/components/ui/button";
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuLabel,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-//   DropdownMenuItem,
-// } from "@/components/ui/dropdown-menu";
-// import { User, Sliders, LogOut } from "lucide-react";
-// import { Link } from "react-router-dom";
-// import { ThemeModeToggle } from "../ThemeModeToggle";
-
-// const Header = () => {
-//   const [showStatusBar, setShowStatusBar] = useState(true);
-//   const [showActivityBar, setShowActivityBar] = useState(false);
-//   const [showPanel, setShowPanel] = useState(false);
-
-//   return (
-//     <header className="w-full border-b shadow-sm px-6">
-//       <div className="container flex items-center justify-between py-4 mx-auto">
-//         {/* Mobile Menu Button */}
-//         <Button variant="outline" size="icon" className="md:hidden">
-//           <Sliders className="h-5 w-5" />
-//         </Button>
-
-//         {/* Site Title */}
-//         <div className="flex items-center gap-4">
-//           <span className="text-lg font-bold">Arnifi Blog</span>
-//         </div>
-
-//         {/* Navigation Links */}
-//         <nav className="hidden md:flex items-center gap-8 mx-auto">
-//           <Link
-//             to="/"
-//             className="text-sm font-medium hover:text-primary transition-colors"
-//           >
-//             Home
-//           </Link>
-//           <Link
-//             to="/about"
-//             className="text-sm font-medium hover:text-primary transition-colors"
-//           >
-//             About
-//           </Link>
-//           <Link
-//             to="/blogs"
-//             className="text-sm font-medium hover:text-primary transition-colors"
-//           >
-//             Blogs
-//           </Link>
-//           <Link
-//             to="/contact"
-//             className="text-sm font-medium hover:text-primary transition-colors"
-//           >
-//             Contact
-//           </Link>
-//         </nav>
-
-//         {/* User Dropdown & Theme Toggle */}
-//         <div className="flex items-center gap-6">
-//           <DropdownMenu>
-//             <DropdownMenuTrigger asChild>
-//               <Button
-//                 variant="ghost"
-//                 size="icon"
-//                 className="focus:ring-0 dark:hover:bg-gray-700 hover:bg-gray-100" // Remove ring and add hover styles
-//               >
-//                 <User className="h-5 w-5 text-gray-700 dark:text-white" />{" "}
-//                 {/* Conditional color for dark mode */}
-//               </Button>
-//             </DropdownMenuTrigger>
-
-//             <DropdownMenuContent className="w-56">
-//               <DropdownMenuLabel>Settings</DropdownMenuLabel>
-//               <DropdownMenuSeparator />
-
-//               {/* Dashboard Option */}
-//               <DropdownMenuItem asChild>
-//                 <Link
-//                   to="/dashboard"
-//                   className="flex items-center gap-2 p-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-//                 >
-//                   <Sliders className="h-4 w-4" />
-//                   Dashboard
-//                 </Link>
-//               </DropdownMenuItem>
-
-//               {/* Logout Option */}
-//               <DropdownMenuItem asChild>
-//                 <Link
-//                   to="/logout"
-//                   className="flex items-center gap-2 p-2 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-//                 >
-//                   <LogOut className="h-4 w-4" />
-//                   Logout
-//                 </Link>
-//               </DropdownMenuItem>
-//             </DropdownMenuContent>
-//           </DropdownMenu>
-
-//           {/* Theme Mode Toggle */}
-//           <ThemeModeToggle />
-//         </div>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Header;
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -134,7 +21,12 @@ const Header = () => {
         </Button>
 
         <div className="flex items-center gap-4">
-          <span className="text-lg font-bold">Arnifi Blog</span>
+          <Link
+            to="/"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            <span className="text-lg font-bold">Arnifi Blog</span>
+          </Link>
         </div>
 
         <nav className="hidden md:flex items-center gap-8 mx-auto">
