@@ -3,6 +3,7 @@
     {
       "source": "/(.*)",
       "destination": "/index.html"
-    }
+    },
+    { "source": "/images/:path*", "destination": "/images/:path*" }
   ]
 }
