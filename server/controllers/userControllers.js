@@ -41,4 +41,19 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { register, login };
+
+
+
+
+const logout = (req, res) => {
+    try {
+        userService.logoutUser(res);
+        res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: 'Logout failed. Please try again later.' });
+    }
+};
+
+
+module.exports = { register, login, logout };
