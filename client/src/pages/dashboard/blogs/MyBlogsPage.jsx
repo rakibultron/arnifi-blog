@@ -27,10 +27,14 @@ import { useNavigate } from "react-router-dom";
 
 const MyBlogsPage = () => {
   const navigate = useNavigate();
-  const { myBlogs, blogs, deleteBlog } = blogStore();
+  const { myBlogs, clearBlogsStore, blogs, deleteBlog } = blogStore();
 
   useEffect(() => {
     myBlogs();
+
+    return () => {
+      clearBlogsStore();
+    };
   }, []);
 
   const handleDelete = (id) => {
