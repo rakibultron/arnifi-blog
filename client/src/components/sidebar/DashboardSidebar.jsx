@@ -82,6 +82,11 @@ import {
 // Menu items
 const items = [
   {
+    title: "Home",
+    url: "/",
+    icon: Calendar,
+  },
+  {
     title: "Dashboard",
     url: "/dashboard",
     icon: Home,
@@ -90,11 +95,6 @@ const items = [
     title: "Add Blogs",
     url: "/dashboard/blogs/create",
     icon: Inbox,
-  },
-  {
-    title: "Profile",
-    url: "#",
-    icon: Calendar,
   },
 ];
 
