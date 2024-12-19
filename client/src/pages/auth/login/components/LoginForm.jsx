@@ -10,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import useAuth from "@/hooks/useAuth";
+import { Link } from "react-router-dom";
+
 const LoginForm = () => {
   const { userLogin } = useAuth();
   const {
@@ -73,6 +75,17 @@ const LoginForm = () => {
             Login
           </Button>
         </form>
+
+        <div className="mt-4 text-left">
+          <p>
+            Don’t have an account?{" "}
+            <Link to="/auth/register">
+              <span className="text-primary hover:underline">
+                Register here
+              </span>
+            </Link>
+          </p>
+        </div>
       </CardContent>
     </Card>
   );
