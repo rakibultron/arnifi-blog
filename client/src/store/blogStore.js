@@ -66,9 +66,22 @@ import { create } from "zustand";
 
 const blogStore = create((set) => ({
     blogs: [],
-    getBlogs: async () => {
+    // getBlogs: async () => {
+    //     try {
+    //         const response = await axios.get("/blogs");
+    //         console.log("Zustand blog res ====>>>", response.data);
+    //         set({ blogs: response.data.blogs });
+    //     } catch (error) {
+    //         console.log("Error fetching blogs", error);
+    //     }
+    // },
+
+    getBlogs: async (filters = {}) => {
         try {
-            const response = await axios.get("/blogs");
+            // Construct query params if filters are provided
+            const queryParams = new URLSearchParams(filters).toString();
+
+            const response = await axios.get(`/blogs?${queryParams}`);
             console.log("Zustand blog res ====>>>", response.data);
             set({ blogs: response.data.blogs });
         } catch (error) {

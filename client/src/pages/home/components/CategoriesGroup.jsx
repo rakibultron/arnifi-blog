@@ -1,18 +1,29 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import blogStore from "@/store/blogStore";
+import { useEffect } from "react";
 
 const CategoriesSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
+  const { getBlogs } = blogStore();
+
   const categories = [
     "All",
-    "Technology",
-    "Design",
-    "Marketing",
+    "Career",
     "Finance",
-    "Development",
-    "Education",
+    "Travel",
+    "Technology",
+    "Lifestyle",
   ];
+
+  useEffect(() => {
+    if (selectedCategory !== "All") {
+      getBlogs({ category: selectedCategory });
+    } else {
+      getBlogs();
+    }
+  }, [selectedCategory, getBlogs]);
 
   return (
     <section className="p-6">
