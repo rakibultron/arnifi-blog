@@ -1,3 +1,4 @@
+import imgPlaceHolder from "../../assets/placeholder.jpg";
 const About = () => {
   return (
     <section className="py-20">
@@ -46,7 +47,7 @@ const About = () => {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <div className="p-4 text-center">
               <img
-                src="/images/placeholder.jpg"
+                src={imgPlaceHolder}
                 alt="Team Member 1"
                 className="w-24 h-24 mx-auto rounded-full mb-3"
               />
@@ -55,7 +56,7 @@ const About = () => {
             </div>
             <div className="p-4 text-center">
               <img
-                src="/images/placeholder.jpg"
+                src={imgPlaceHolder}
                 alt="Team Member 2"
                 className="w-24 h-24 mx-auto rounded-full mb-3"
               />
@@ -64,7 +65,7 @@ const About = () => {
             </div>
             <div className="p-4 text-center">
               <img
-                src="/images/placeholder.jpg"
+                src={imgPlaceHolder}
                 alt="Team Member 3"
                 className="w-24 h-24 mx-auto rounded-full mb-3"
               />
@@ -73,7 +74,7 @@ const About = () => {
             </div>
             <div className="p-4 text-center">
               <img
-                src="/images/placeholder.jpg"
+                src={imgPlaceHolder}
                 alt="Team Member 4"
                 className="w-24 h-24 mx-auto rounded-full mb-3"
               />
