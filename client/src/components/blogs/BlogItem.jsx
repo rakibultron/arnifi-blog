@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import imgPlaceHolder from "../../assets/placeholder.jpg";
+
 const BlogItem = ({
   id,
   title,
@@ -10,8 +11,11 @@ const BlogItem = ({
   authorName,
   authorImg,
 }) => {
+  const truncatedContent = content ? content.slice(0, 150) : "";
+  const showMore = content && content.length > 150;
+
   return (
-    <div className="card bg-background border border-border shadow-sm rounded-md overflow-hidden flex flex-col">
+    <div className="card bg-background border border-border shadow-sm rounded-md overflow-hidden flex flex-col w-full sm:w-80 mx-auto">
       <div className="relative h-48">
         <div className="absolute top-2 right-2 px-2 py-1 dark:text-black text-white text-xs rounded-tr-lg rounded-bl-lg">
           <div className="flex space-x-2">
@@ -37,7 +41,17 @@ const BlogItem = ({
               {title}
             </Link>
           </h3>
-          <p className="text-sm text-muted-foreground mt-2">{content}</p>
+          <p className="text-sm text-muted-foreground mt-2">
+            {truncatedContent}
+            {showMore && (
+              <Link
+                to={`/blogs/${id}`}
+                className="text-primary font-medium hover:underline ml-1"
+              >
+                Read more
+              </Link>
+            )}
+          </p>
         </div>
 
         <div className="flex items-center mt-4 space-x-4">
