@@ -13,6 +13,8 @@ import BlogDetailsPage from "./pages/blog/BlogDetails";
 import CreateBlogPage from "./pages/dashboard/blogs/CreateBlogPage";
 import UpdateBlogPage from "./pages/dashboard/blogs/UpdateBlogPage";
 import MyBlogsPage from "./pages/dashboard/blogs/MyBlogsPage";
+import NotFountPage from "./pages/not-found/NotFountPage";
+import ContactPage from "./pages/contact/ContactPage";
 
 const MainComponent = () => {
   // Define routes for authenticated and unauthenticated users
@@ -37,6 +39,10 @@ const MainComponent = () => {
           path: "blogs/:id",
           element: <BlogDetailsPage />,
         },
+        {
+          path: "contact",
+          element: <ContactPage />,
+        },
       ],
     },
     {
@@ -58,13 +64,14 @@ const MainComponent = () => {
       element: <AdminLayout />,
       children: [
         {
+          path: "",
+          element: <MyBlogsPage />,
+        },
+        {
           path: "profile",
           element: <ProfilePage />,
         },
-        {
-          path: "blogs",
-          element: <MyBlogsPage />,
-        },
+
         {
           path: "blogs/create",
           element: <CreateBlogPage />,
@@ -74,6 +81,10 @@ const MainComponent = () => {
           element: <UpdateBlogPage />,
         },
       ],
+    },
+    {
+      path: "*",
+      element: <NotFountPage />,
     },
   ]);
 };
